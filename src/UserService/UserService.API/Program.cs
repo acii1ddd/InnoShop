@@ -1,14 +1,11 @@
+using User.API;
+
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddOpenApi();
+builder.Services.AddServices();
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
-    app.MapOpenApi();
-}
-
-app.UseAuthorization();
+app.ConfigureApp();
 
 await app.RunAsync();
