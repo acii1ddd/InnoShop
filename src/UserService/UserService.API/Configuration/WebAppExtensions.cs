@@ -1,6 +1,6 @@
-﻿namespace User.API;
+﻿namespace User.API.Configuration;
 
-public static class AppConfiguration
+public static class WebAppExtensions
 {
     public static WebApplication ConfigureApp(this WebApplication app)
     {

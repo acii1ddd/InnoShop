@@ -1,8 +1,8 @@
-using User.API;
+using User.API.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddServices();
+builder.Services.AddApiServices(builder.Configuration);
 
 var app = builder.Build();
 

@@ -1,0 +1,22 @@
+services:
+  users-db:
+    container_name: users-db
+    image: postgres:18
+    restart: always
+    ports: 
+     - "8989:${USERS_CONTAINER_PORT}"
+    volumes:
+      - users-db:/var/lib/postgresql
+    environment:
+      - POSTGRES_DB=${USERS_POSTGRES_DB}
+      - PGPORT=${USERS_CONTAINER_PORT}
+      - POSTGRES_USER=${USERS_POSTGRES_USER}
+      - POSTGRES_PASSWORD=${USERS_POSTGRES_PASSWORD}
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${USERS_POSTGRES_USER} -d ${USERS_POSTGRES_DB} -p ${USERS_CONTAINER_PORT}" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  users-db:

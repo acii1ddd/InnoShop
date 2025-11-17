@@ -7,6 +7,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docker", "docker", "{46D74D4F-1F98-49F4-8A41-11BEE98D07D0}"
 	ProjectSection(SolutionItems) = preProject
 		docker\docker-compose.yml = docker\docker-compose.yml
+		docker\.env = docker\.env
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UserService", "UserService", "{F22ACA09-B480-4495-93CA-DB360B78F6EC}"
