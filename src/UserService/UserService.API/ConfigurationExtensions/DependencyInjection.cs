@@ -1,16 +1,26 @@
-﻿using UserService.Infrastructure;
+﻿using UserService.API.EndpointsSettings;
+
 
 namespace UserService.API.ConfigurationExtensions;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddApiServices(
-        this IServiceCollection services, IConfiguration configuration)
+    extension(IServiceCollection services)
     {
-        services.AddOpenApi();
-
-        services.AddInfrastructureServices(configuration);
+        public IServiceCollection AddApiServices(IConfiguration configuration)
+        {
+            services
+                .AddOpenApiSpec()
+                .AddEndpoints(typeof(Program).Assembly);
         
-        return services;
+            return services;
+        }
+
+        private IServiceCollection AddOpenApiSpec()
+        {
+            services.AddOpenApi();
+        
+            return services;
+        }
     }
 }

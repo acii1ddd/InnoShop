@@ -1,4 +1,7 @@
-﻿namespace UserService.API.ConfigurationExtensions;
+﻿using Scalar.AspNetCore;
+using UserService.API.EndpointsSettings;
+
+namespace UserService.API.ConfigurationExtensions;
 
 public static class WebAppExtensions
 {
@@ -7,9 +10,13 @@ public static class WebAppExtensions
         if (app.Environment.IsDevelopment())
         {
             app.MapOpenApi();
+            app.MapScalarApiReference();
         }
 
-        app.UseAuthorization();
+        // map endpoints
+        var mapGroup = app.MapGroup("/api/users");
+        app.MapEndpoints(mapGroup);
+        
         await app.InitDbAsync();
     }
 }

@@ -31,7 +31,7 @@ public class UserEntity
         if (!email.Contains('@'))
             throw new ArgumentException("Incorrect email.", nameof(email));
 
-        if (Enum.IsDefined(role))
+        if (!Enum.IsDefined(role))
             throw new ArgumentException("Incorrect user role.", nameof(role));
         
         ArgumentException.ThrowIfNullOrEmpty(passwordHash);
