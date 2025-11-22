@@ -1,39 +1,51 @@
 using System.Linq.Expressions;
+using Microsoft.EntityFrameworkCore;
 using UserService.Domain.Entities;
 using UserService.Domain.Repositories;
 
 namespace UserService.Infrastructure.Repositories;
 
-public class UserRepository() : IUserRepository
+public class UserRepository(UserContext context) : IUserRepository
 {
-    public Task<IReadOnlyList<UserEntity>>  GetAllAsync()
+    public async Task<IReadOnlyList<UserEntity>> GetAllAsync()
     {
-        throw new NotImplementedException();
+        return await context.Users
+            .AsNoTracking()
+            .ToListAsync();
     }
 
-    public Task<IReadOnlyList<UserEntity>> GetAllAsync(
+    public async Task<IReadOnlyList<UserEntity>> GetAllAsync(
         Expression<Func<UserEntity, bool>> predicate)
     {
-        throw new NotImplementedException();
+        return await context.Users
+            .AsNoTracking()
+            .Where(predicate)
+            .ToListAsync();
     }
 
-    public Task<UserEntity?> GetById(Guid id)
+    public async Task<UserEntity?> GetById(Guid id)
     {
-        throw new NotImplementedException();
+        return await context.Users
+            .FirstOrDefaultAsync(x => x.Id == id);
     }
-
-    public Task<Guid> AddAsync(UserEntity entity)
+    public async Task<Guid> AddAsync(UserEntity entity)
     {
-        throw new NotImplementedException();
+        await context.Users.AddAsync(entity);
+
+        await context.SaveChangesAsync();
+        
+        return entity.Id;
     }
-
-    public Task UpdateAsync(UserEntity entity)
+    public async Task UpdateAsync(UserEntity entity)
     {
-        throw new NotImplementedException();
+        context.Users.Update(entity);
+
+        await context.SaveChangesAsync();
     }
-
-    public Task DeleteAsync(UserEntity entity)
+    public async Task DeleteAsync(UserEntity entity)
     {
-        throw new NotImplementedException();
+        context.Users.Remove(entity);
+
+        await context.SaveChangesAsync();
     }
 }
