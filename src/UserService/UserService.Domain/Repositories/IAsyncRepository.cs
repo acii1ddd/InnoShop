@@ -4,15 +4,13 @@ namespace UserService.Domain.Repositories;
 
 public interface IAsyncRepository<T>
 {
-    public Task<IReadOnlyList<T>> GetAllAsync();
+    public Task<IReadOnlyList<T>> GetAllAsync(Expression<Func<T, bool>> predicate, CancellationToken ct);
 
-    public Task<IReadOnlyList<T>> GetAllAsync(Expression<Func<T, bool>> predicate);
+    public Task<T?> GetById(Guid id, CancellationToken ct);
 
-    public Task<T?> GetById(Guid id);
+    public Task<Guid> AddAsync(T entity, CancellationToken ct);
 
-    public Task<Guid> AddAsync(T entity);
+    public Task UpdateAsync(T entity, CancellationToken ct);
 
-    public Task UpdateAsync(T entity);
-
-    public Task DeleteAsync(T entity);
+    public Task DeleteAsync(T entity, CancellationToken ct);
 }

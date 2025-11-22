@@ -26,7 +26,7 @@ internal sealed class CreateHandler(IUserRepository userRepository) : ICommandHa
             isEmailConfirmed: false
         );
         
-        var userId = await userRepository.AddAsync(user);
+        var userId = await userRepository.AddAsync(user, ct);
 
         return new CreateUserResult(userId);
     }

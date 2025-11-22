@@ -10,7 +10,7 @@ public sealed record CreateUserRequest(string Name, string Email, string Passwor
 
 public sealed record CreateUserResponse(Guid UserId);
 
-public class Create : IEndpoint
+public class CreateUserEndpoint : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
@@ -27,7 +27,10 @@ public class Create : IEndpoint
             var response = result.Adapt<CreateUserResponse>();
             
             return Results.Created($"api/users/{response.UserId}", response);
-        });
+        })
+        .WithName("CreateUser")
+        .Produces<CreateUserResponse>()
+        .WithSummary("Create a user with provided information");;
     }
 }
 
