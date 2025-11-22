@@ -29,6 +29,7 @@ public class UserRepository(UserContext context) : IUserRepository
         return await context.Users
             .FirstOrDefaultAsync(x => x.Id == id);
     }
+    
     public async Task<Guid> AddAsync(UserEntity entity)
     {
         await context.Users.AddAsync(entity);
@@ -37,12 +38,14 @@ public class UserRepository(UserContext context) : IUserRepository
         
         return entity.Id;
     }
+    
     public async Task UpdateAsync(UserEntity entity)
     {
         context.Users.Update(entity);
 
         await context.SaveChangesAsync();
     }
+    
     public async Task DeleteAsync(UserEntity entity)
     {
         context.Users.Remove(entity);

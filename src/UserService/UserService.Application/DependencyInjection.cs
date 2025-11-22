@@ -9,6 +9,15 @@ public static class DependencyInjection
     {
         services.AddScoped<CreateHandler>();
         
+        services.AddMediatR(config =>
+        {
+            config.RegisterServicesFromAssembly(typeof(CreateHandler).Assembly);
+
+            // todo behaviors
+            //config.AddBehavior < typeof(LoggingBehavior) > ();
+            //config.AddBehavior < typeof(ValidationBehavior) > ();
+        });
+        
         return services;
     }
 }

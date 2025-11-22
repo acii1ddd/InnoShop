@@ -8,15 +8,8 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\Shared\Shared.csproj" />
       <ProjectReference Include="..\UserService.Domain\UserService.Domain.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="UseCases\Qureies\" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.0" />
     </ItemGroup>
 
 </Project>

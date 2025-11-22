@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using UserService.Domain.Repositories;
 using UserService.Infrastructure.Data;
+using UserService.Infrastructure.Repositories;
 
 namespace UserService.Infrastructure;
 
@@ -17,6 +19,8 @@ public static class DependencyInjection
             
             options.UseNpgsql(connectionString);
         });
+
+        services.AddScoped<IUserRepository, UserRepository>();
         
         return services;
     }

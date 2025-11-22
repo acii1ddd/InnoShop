@@ -1,11 +1,33 @@
+using Shared.CQRS;
+using UserService.Domain.Entities;
+using UserService.Domain.Enums;
+using UserService.Domain.Repositories;
+
 namespace UserService.Application.UseCases.Commands;
 
-public class CreateHandler
+public sealed record CreateUserCommand(string Name, string Email, string Password) : ICommand<CreateUserResult>;
+
+public sealed record CreateUserResult(Guid UserId);
+
+internal sealed class CreateHandler(IUserRepository userRepository) : ICommandHandler<CreateUserCommand, CreateUserResult>
 {
-    public async Task<string> HandleAsync()
+    public async Task<CreateUserResult> Handle(CreateUserCommand command, CancellationToken ct)
     {
-        await Task.Delay(2000);
+        // todo pass hashing
+        var passwordHash = command.Password;
         
-        return "Hello World!";
+        var user = UserEntity.Create(
+            Guid.NewGuid(),
+            command.Name,
+            command.Email,
+            UserRole.Default,
+            passwordHash,
+            isActive: true,
+            isEmailConfirmed: false
+        );
+        
+        var userId = await userRepository.AddAsync(user);
+
+        return new CreateUserResult(userId);
     }
 }
