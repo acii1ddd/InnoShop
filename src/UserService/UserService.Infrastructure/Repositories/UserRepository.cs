@@ -4,9 +4,9 @@ using UserService.Domain.Repositories;
 
 namespace UserService.Infrastructure.Repositories;
 
-public class UserRepository : IUserRepository
+public class UserRepository() : IUserRepository
 {
-    public IEnumerable<UserEntity> GetAllAsync()
+    public Task<IReadOnlyList<UserEntity>>  GetAllAsync()
     {
         throw new NotImplementedException();
     }
@@ -33,11 +33,6 @@ public class UserRepository : IUserRepository
     }
 
     public Task DeleteAsync(UserEntity entity)
-    {
-        throw new NotImplementedException();
-    }
-
-    Task<IReadOnlyList<UserEntity>> IAsyncRepository<UserEntity>.GetAllAsync()
     {
         throw new NotImplementedException();
     }

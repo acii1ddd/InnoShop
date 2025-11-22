@@ -1,4 +1,4 @@
-using UserService.Domain.Entities.Enums;
+using UserService.Domain.Enums;
 
 namespace UserService.Domain.Entities;
 
