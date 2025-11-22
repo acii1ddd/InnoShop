@@ -7,7 +7,7 @@ namespace UserService.Application.UseCases.Queries;
 public sealed record GetUsersQuery(int PageIndex = 1, int PageSize = 10) : IQuery<GetPaginatedUsersResult>;
 public sealed record GetPaginatedUsersResult(IEnumerable<UserEntity> Users, int TotalCount, int TotalPages);
 
-public sealed class Get(IUserRepository userRepository) : IQueryHandler<GetUsersQuery, GetPaginatedUsersResult>
+internal sealed class GetUsersQueryHandler(IUserRepository userRepository) : IQueryHandler<GetUsersQuery, GetPaginatedUsersResult>
 {
     public async Task<GetPaginatedUsersResult> Handle(GetUsersQuery query, CancellationToken ct)
     {

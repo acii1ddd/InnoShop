@@ -9,7 +9,7 @@ public sealed record CreateUserCommand(string Name, string Email, string Passwor
 
 public sealed record CreateUserResult(Guid UserId);
 
-internal sealed class CreateHandler(IUserRepository userRepository) : ICommandHandler<CreateUserCommand, CreateUserResult>
+internal sealed class CreateUserCommandHandler(IUserRepository userRepository) : ICommandHandler<CreateUserCommand, CreateUserResult>
 {
     public async Task<CreateUserResult> Handle(CreateUserCommand command, CancellationToken ct)
     {

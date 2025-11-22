@@ -7,11 +7,9 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
-        services.AddScoped<CreateHandler>();
-        
         services.AddMediatR(config =>
         {
-            config.RegisterServicesFromAssembly(typeof(CreateHandler).Assembly);
+            config.RegisterServicesFromAssembly(typeof(CreateUserCommandHandler).Assembly);
 
             // todo behaviors
             //config.AddBehavior < typeof(LoggingBehavior) > ();
