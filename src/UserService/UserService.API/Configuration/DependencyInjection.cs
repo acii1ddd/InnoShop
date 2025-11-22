@@ -1,6 +1,6 @@
 ﻿using UserService.Infrastructure;
 
-namespace User.API.Configuration;
+namespace UserService.API.Configuration;
 
 public static class DependencyInjection
 {

@@ -12,11 +12,21 @@ public class UserConfiguration : IEntityTypeConfiguration<UserEntity>
     {
         builder.HasKey(x => x.Id);
         
+        builder.Property(x => x.Name)
+            .IsRequired()
+            .HasMaxLength(MaxLength);
+        
         builder.Property(x => x.Email)
             .IsRequired()
             .HasMaxLength(MaxLength);
 
         builder.Property(x => x.Role)
             .IsRequired();
+
+        builder.Property(x => x.PasswordHash).IsRequired();
+        
+        builder.Property(x => x.PasswordHash).IsRequired();
+        
+        builder.Property(x => x.IsEmailConfirmed).IsRequired();
     }
 }

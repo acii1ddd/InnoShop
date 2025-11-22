@@ -1,4 +1,4 @@
-using User.API.Configuration;
+using UserService.API.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 

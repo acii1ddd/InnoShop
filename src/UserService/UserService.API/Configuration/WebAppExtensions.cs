@@ -1,4 +1,4 @@
-﻿namespace User.API.Configuration;
+﻿namespace UserService.API.Configuration;
 
 public static class WebAppExtensions
 {
