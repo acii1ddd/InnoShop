@@ -2,6 +2,7 @@ using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using UserService.Domain.Entities;
 using UserService.Domain.Repositories;
+using UserService.Infrastructure.Data;
 
 namespace UserService.Infrastructure.Repositories;
 

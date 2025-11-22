@@ -11,3 +11,5 @@ MIGRATION_NAME=$1
 dotnet ef migrations add "$MIGRATION_NAME" \
   -s "$HOME/pre-trainee/InnoShop/src/UserService/UserService.API/" \
   -p "$HOME/pre-trainee/InnoShop/src/UserService/UserService.Infrastructure/"
+  --output-dir Data/Migrations
+

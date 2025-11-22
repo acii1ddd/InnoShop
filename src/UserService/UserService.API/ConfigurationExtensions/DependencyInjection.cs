@@ -1,6 +1,6 @@
 ﻿using UserService.Infrastructure;
 
-namespace UserService.API.Configuration;
+namespace UserService.API.ConfigurationExtensions;
 
 public static class DependencyInjection
 {
@@ -9,7 +9,7 @@ public static class DependencyInjection
     {
         services.AddOpenApi();
 
-        services.AddInfrastructure(configuration);
+        services.AddInfrastructureServices(configuration);
         
         return services;
     }

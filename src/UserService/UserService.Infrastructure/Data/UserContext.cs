@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using UserService.Domain.Entities;
-using UserService.Infrastructure.Configurations;
+using UserService.Infrastructure.Data.Configurations;
 
-namespace UserService.Infrastructure;
+namespace UserService.Infrastructure.Data;
 
 public class UserContext(DbContextOptions<UserContext> options)
     : DbContext(options)

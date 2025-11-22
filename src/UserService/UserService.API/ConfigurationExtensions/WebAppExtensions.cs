@@ -1,8 +1,8 @@
-﻿namespace UserService.API.Configuration;
+﻿namespace UserService.API.ConfigurationExtensions;
 
 public static class WebAppExtensions
 {
-    public static WebApplication ConfigureApp(this WebApplication app)
+    public static async Task ConfigureApp(this WebApplication app)
     {
         if (app.Environment.IsDevelopment())
         {
@@ -10,7 +10,6 @@ public static class WebAppExtensions
         }
 
         app.UseAuthorization();
-        
-        return app;
+        await app.InitDbAsync();
     }
 }
