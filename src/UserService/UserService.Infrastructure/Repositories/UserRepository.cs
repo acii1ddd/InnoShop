@@ -17,7 +17,7 @@ public class UserRepository(UserContext context) : IUserRepository
             .ToListAsync(cancellationToken: ct);
     }
 
-    public async Task<UserEntity?> GetById(Guid id, CancellationToken ct)
+    public async Task<UserEntity?> GetByIdAsync(Guid id, CancellationToken ct)
     {
         return await context.Users
             .FirstOrDefaultAsync(x => x.Id == id, cancellationToken: ct);

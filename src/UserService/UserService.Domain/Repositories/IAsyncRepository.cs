@@ -6,7 +6,7 @@ public interface IAsyncRepository<T>
 {
     public Task<IReadOnlyList<T>> GetAllAsync(Expression<Func<T, bool>> predicate, CancellationToken ct);
 
-    public Task<T?> GetById(Guid id, CancellationToken ct);
+    public Task<T?> GetByIdAsync(Guid id, CancellationToken ct);
 
     public Task<Guid> AddAsync(T entity, CancellationToken ct);
 

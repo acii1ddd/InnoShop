@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using UserService.API.EndpointsSettings;
 using UserService.Application.UseCases.Commands;
 
-namespace UserService.API.Endpoints.Users;
+namespace UserService.API.Endpoints.Users.Post;
 
 public sealed record CreateUserRequest(string Name, string Email, string Password);
 
@@ -30,7 +30,7 @@ public class CreateUserEndpoint : IEndpoint
         })
         .WithName("CreateUser")
         .Produces<CreateUserResponse>()
-        .WithSummary("Create a user with provided information");;
+        .WithSummary("Create a user with provided information");
     }
 }
 

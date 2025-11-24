@@ -2,10 +2,10 @@ using System.ComponentModel;
 using Mapster;
 using MediatR;
 using UserService.API.EndpointsSettings;
+using UserService.Application.Dtos;
 using UserService.Application.UseCases.Queries;
-using UserService.Domain.Entities;
 
-namespace UserService.API.Endpoints.Users;
+namespace UserService.API.Endpoints.Users.Get;
 
 public record GetUsersRequest(
     [property: DefaultValue(1)]
@@ -14,7 +14,7 @@ public record GetUsersRequest(
     int PageSize = 10
 );
 
-public record GetPaginatedUsersResponse(IEnumerable<UserEntity> Users, int TotalCount, int TotalPages);
+public record GetPaginatedUsersResponse(IEnumerable<UserDto> Users, int TotalCount, int TotalPages);
 
 public class GetUsersEndpoint : IEndpoint
 {

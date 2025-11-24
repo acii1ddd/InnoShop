@@ -66,11 +66,46 @@ public class UserEntity
         IsActive = false;
     }
 
+    public void Activate()
+    {
+        if (IsActive)
+            throw new InvalidOperationException("User is already active.");
+        
+        IsActive = true;
+    }
+    
     public void ChangeRole(UserRole newRole)
     {
         if (Role == newRole)
-            throw new InvalidOperationException("This role is  already assigned to this user.");
+            throw new InvalidOperationException("This role is already assigned to this user.");
+        
+        if (!Enum.IsDefined(newRole))
+            throw new ArgumentException("Incorrect user role.", nameof(newRole));
         
         Role = newRole;
+    }
+    
+    public void ChangeName(string name)
+    {
+        if (name == Name)
+            throw new InvalidOperationException("This name is already assigned to this user.");
+        
+        ArgumentException.ThrowIfNullOrEmpty(name);
+        if (name.Length < 5)
+            throw new ArgumentException("Name should include at least 5 letters.", nameof(name));
+        
+        Name = name;
+    }
+    
+    public void ChangeEmail(string email)
+    {
+        if (email == Email)
+            throw new InvalidOperationException("This email is already assigned to this user.");
+     
+        ArgumentException.ThrowIfNullOrEmpty(email);
+        if (!email.Contains('@'))
+            throw new ArgumentException("Incorrect email.", nameof(email));
+        
+        Email = email;
     }
 }

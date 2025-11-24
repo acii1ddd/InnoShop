@@ -8,7 +8,7 @@ internal static class InitialData
     public static IEnumerable<UserEntity> Users =>
     [
         UserEntity.Create(
-            Guid.NewGuid(), 
+            Guid.Parse("11111111-1111-1111-1111-111111111111"), 
             "Alice Johnson",
             "alice.johnson@example.com",
             UserRole.Admin,
@@ -22,7 +22,7 @@ internal static class InitialData
             "bob.smith@example.com",
             UserRole.Default,
             "hashed_password_0987654321",
-            isActive: false,
+            isActive: true,
             isEmailConfirmed: false
         ),
         UserEntity.Create(
@@ -31,7 +31,7 @@ internal static class InitialData
             "charlie.brown@example.com",
             UserRole.Default,
             "hashed_password_abcdef123456",
-            isActive: false,
+            isActive: true,
             isEmailConfirmed: false
         )
     ];

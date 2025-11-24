@@ -5,22 +5,22 @@ namespace UserService.API.ConfigurationExtensions;
 
 public static class DependencyInjection
 {
-    extension(IServiceCollection services)
-    {
-        public IServiceCollection AddApiServices(IConfiguration configuration)
+        extension(IServiceCollection services)
         {
-            services
-                .AddOpenApiSpec()
-                .AddEndpoints(typeof(Program).Assembly);
+            public IServiceCollection AddApiServices(IConfiguration configuration)
+            {
+                services
+                    .AddOpenApiSpec()
+                    .AddEndpoints(typeof(Program).Assembly);
         
-            return services;
-        }
+                return services;
+            }
 
-        private IServiceCollection AddOpenApiSpec()
-        {
-            services.AddOpenApi();
+            private IServiceCollection AddOpenApiSpec()
+            {
+                services.AddOpenApi();
         
-            return services;
+                return services;
+            }
         }
-    }
 }

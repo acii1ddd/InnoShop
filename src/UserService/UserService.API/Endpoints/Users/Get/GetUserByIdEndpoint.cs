@@ -2,13 +2,13 @@ using Mapster;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using UserService.API.EndpointsSettings;
+using UserService.Application.Dtos;
 using UserService.Application.UseCases.Queries;
-using UserService.Domain.Entities;
 
-namespace UserService.API.Endpoints.Users;
+namespace UserService.API.Endpoints.Users.Get;
 
 // todo dto
-public record GetUserByIdResponse(UserEntity User);
+public record GetUserByIdResponse(UserDto User);
 public class GetUserByIdEndpoint : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
