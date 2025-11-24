@@ -21,10 +21,10 @@ public class UpdateUserEndpoint : IEndpoint
 
             _ = await sender.Send(command, ct);
 
-            return Results.Ok();
+            return Results.NoContent();
         })
         .WithName("UpdateUser")
-        .Produces<StatusCodeResult>()
+        .Produces<StatusCodeResult>(StatusCodes.Status204NoContent)
         .WithSummary("Update a user name, email, role with provided information");
     }
 }

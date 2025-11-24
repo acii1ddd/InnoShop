@@ -16,10 +16,10 @@ public class ActivateUser : IEndpoint
         {
             _ = await sender.Send(new ActivateUserCommand(id), ct);
 
-            return Results.Ok();
+            return Results.NoContent();
         })
         .WithName("ActivateUser")
-        .Produces<StatusCodeResult>()
+        .Produces<StatusCodeResult>(StatusCodes.Status204NoContent)
         .WithSummary("Activate user");
     }
 }

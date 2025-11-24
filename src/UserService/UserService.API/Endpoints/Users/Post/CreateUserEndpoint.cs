@@ -29,7 +29,7 @@ public class CreateUserEndpoint : IEndpoint
             return Results.Created($"api/users/{response.UserId}", response);
         })
         .WithName("CreateUser")
-        .Produces<CreateUserResponse>()
+        .Produces<CreateUserResponse>(StatusCodes.Status201Created)
         .WithSummary("Create a user with provided information");
     }
 }

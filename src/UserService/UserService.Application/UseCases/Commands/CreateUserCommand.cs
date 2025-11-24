@@ -15,7 +15,8 @@ internal sealed class CreateUserCommandHandler(
     IUserRepository userRepository, IPasswordHasher passwordHasher) 
     : ICommandHandler<CreateUserCommand, CreateUserResult>
 {
-    public async Task<CreateUserResult> Handle(CreateUserCommand command, CancellationToken ct)
+    public async Task<CreateUserResult> Handle(CreateUserCommand command, 
+        CancellationToken ct)
     {
         var passwordHash = passwordHasher.Hash(command.Password);
         
