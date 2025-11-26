@@ -7,7 +7,6 @@ using UserService.Application.UseCases.Queries;
 
 namespace UserService.API.Endpoints.Users.Get;
 
-// todo dto
 public record GetUserByIdResponse(UserDto User);
 public class GetUserByIdEndpoint : IEndpoint
 {

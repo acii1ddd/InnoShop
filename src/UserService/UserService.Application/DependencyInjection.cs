@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using FluentValidation;
+using Microsoft.Extensions.DependencyInjection;
+using Shared.Behavior;
+using Shared.Exceptions.Handler;
 using UserService.Application.UseCases.Commands;
 
 namespace UserService.Application;
@@ -11,10 +14,13 @@ public static class DependencyInjection
         {
             config.RegisterServicesFromAssembly(typeof(CreateUserCommandHandler).Assembly);
 
-            // todo behaviors
-            //config.AddBehavior < typeof(LoggingBehavior) > ();
-            //config.AddBehavior < typeof(ValidationBehavior) > ();
+            config.AddOpenBehavior(typeof(ValidationBehavior<,>));
+            config.AddOpenBehavior(typeof(LoggingBehavior<,>));
         });
+
+        services.AddExceptionHandler<ExceptionHandler>();
+        
+        services.AddValidatorsFromAssembly(typeof(ActivateUserCommandValidator).Assembly);
         
         return services;
     }

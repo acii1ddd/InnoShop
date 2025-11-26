@@ -17,6 +17,8 @@ public static class WebAppExtensions
         var mapGroup = app.MapGroup("/api/users");
         app.MapEndpoints(mapGroup);
         
+        app.UseExceptionHandler(opt => {});
+        
         await app.InitDbAsync();
     }
 }

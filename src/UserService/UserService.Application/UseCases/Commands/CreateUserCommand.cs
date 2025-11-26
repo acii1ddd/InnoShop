@@ -1,3 +1,4 @@
+using FluentValidation;
 using Shared.CQRS;
 using UserService.Application.Interfaces;
 using UserService.Domain.Entities;
@@ -8,6 +9,26 @@ namespace UserService.Application.UseCases.Commands;
 
 public sealed record CreateUserCommand(string Name, string Email, string Password) 
     : ICommand<CreateUserResult>;
+
+public class CreateUserCommandValidator : AbstractValidator<CreateUserCommand>
+{
+    public CreateUserCommandValidator()
+    {
+        RuleFor(x => x.Name)
+            .NotEmpty().WithMessage("Name is required")
+            .MinimumLength(5).WithMessage("Name must be at least 5 characters long")
+            .MaximumLength(100).WithMessage("Name must not exceed 100 characters");
+
+        RuleFor(x => x.Email)
+            .NotEmpty().WithMessage("Email is required")
+            .EmailAddress().WithMessage("Email must be a valid email address");
+
+        RuleFor(x => x.Password)
+            .NotEmpty().WithMessage("Password is required")
+            .MinimumLength(6).WithMessage("Password must be at least 6 characters long")
+            .MaximumLength(50).WithMessage("Password must not exceed 50 characters");
+    }
+}
 
 public sealed record CreateUserResult(Guid UserId);
 
