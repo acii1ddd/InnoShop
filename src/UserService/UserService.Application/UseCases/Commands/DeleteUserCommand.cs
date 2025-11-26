@@ -1,3 +1,4 @@
+using FluentValidation;
 using MediatR;
 using Shared.CQRS;
 using Shared.Exceptions;
@@ -7,6 +8,15 @@ namespace UserService.Application.UseCases.Commands;
 
 public sealed record DeleteUserCommand(Guid Id) 
     : ICommand;
+
+public class DeleteUserCommandValidator : AbstractValidator<DeleteUserCommand>
+{
+    public DeleteUserCommandValidator()
+    {
+        RuleFor(x => x.Id)
+            .NotEmpty().WithMessage("User Id is required for deletion");
+    }
+}
 
 internal sealed class DeleteUserCommandHandler(IUserRepository userRepository)
     : ICommandHandler<DeleteUserCommand>

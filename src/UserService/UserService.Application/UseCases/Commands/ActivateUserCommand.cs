@@ -1,3 +1,4 @@
+using FluentValidation;
 using MediatR;
 using Shared.CQRS;
 using Shared.Exceptions;
@@ -7,6 +8,15 @@ namespace UserService.Application.UseCases.Commands;
 
 public sealed record ActivateUserCommand(Guid Id) 
     : ICommand;
+
+public class ActivateUserCommandValidator : AbstractValidator<ActivateUserCommand>
+{
+    public ActivateUserCommandValidator()
+    {
+        RuleFor(x => x.Id)
+            .NotEmpty().WithMessage("Id is required");
+    }
+}
 
 internal sealed class ActivateUserCommandHandler(IUserRepository userRepository)
     : ICommandHandler<ActivateUserCommand>

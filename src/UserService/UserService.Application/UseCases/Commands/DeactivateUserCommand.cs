@@ -1,3 +1,4 @@
+using FluentValidation;
 using MediatR;
 using Shared.CQRS;
 using Shared.Exceptions;
@@ -7,6 +8,15 @@ namespace UserService.Application.UseCases.Commands;
 
 public sealed record DeactivateUserCommand(Guid Id) 
     : ICommand;
+
+public class DeactivateUserCommandValidator : AbstractValidator<DeactivateUserCommand>
+{
+    public DeactivateUserCommandValidator()
+    {
+        RuleFor(x => x.Id)
+            .NotEmpty().WithMessage("User Id is required for deactivation");
+    }
+}
 
 internal sealed class DeactivateUserCommandHandler(IUserRepository userRepository) 
     : ICommandHandler<DeactivateUserCommand>
