@@ -10,7 +10,7 @@ public class UpdateUserEndpoint : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapPut("/{id:guid}", async (
+        app.MapPut("users/{id:guid}", async (
             ISender sender,
             [FromRoute] Guid id,
             [FromBody] UpdateUserRequest updateUserRequest,

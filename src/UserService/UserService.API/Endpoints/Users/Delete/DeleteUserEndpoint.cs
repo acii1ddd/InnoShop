@@ -8,7 +8,7 @@ public class DeleteUserEndpoint : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapDelete("/{id:guid}", async (
+        app.MapDelete("users/{id:guid}", async (
             ISender sender,
             Guid id,
             CancellationToken ct) =>

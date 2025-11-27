@@ -2,7 +2,6 @@ using Mapster;
 using Shared.CQRS;
 using Shared.Exceptions;
 using UserService.Application.Dtos;
-using UserService.Domain.Entities;
 using UserService.Domain.Repositories;
 
 namespace UserService.Application.UseCases.Queries;

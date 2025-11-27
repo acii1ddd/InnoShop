@@ -1,8 +1,8 @@
 using FluentValidation;
 using Shared.CQRS;
-using UserService.Application.Interfaces;
 using UserService.Domain.Entities;
 using UserService.Domain.Enums;
+using UserService.Domain.Interfaces;
 using UserService.Domain.Repositories;
 
 namespace UserService.Application.UseCases.Commands;

@@ -14,7 +14,7 @@ public class CreateUserEndpoint : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapPost("/", async (
+        app.MapPost("users/", async (
             ISender sender, 
             [FromBody] CreateUserRequest createUserRequest, 
             CancellationToken ct) =>

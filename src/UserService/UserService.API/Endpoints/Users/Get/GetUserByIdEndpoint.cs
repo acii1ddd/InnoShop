@@ -12,7 +12,7 @@ public class GetUserByIdEndpoint : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapGet("/{id:guid}", async (
+        app.MapGet("users/{id:guid}", async (
             ISender sender, 
             [FromRoute] Guid id, 
             CancellationToken ct) =>

@@ -10,9 +10,9 @@ internal static class InitialData
         UserEntity.Create(
             Guid.Parse("11111111-1111-1111-1111-111111111111"), 
             "Alice Johnson",
-            "alice.johnson@example.com",
+            "alice@com",
             UserRole.Admin,
-            "hashed_password_1234567890",
+            "$2a$11$AuzifkcqGdSB/hXm4XkVf.fnfdn6bp.9wT2sMqLetOiK7vyIcd8gm",
             isActive: true,
             isEmailConfirmed: true
         ),
