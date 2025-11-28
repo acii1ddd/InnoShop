@@ -74,15 +74,15 @@ public class UserEntity
         IsActive = true;
     }
     
-    public void ChangeRole(UserRole newRole)
+    public void ChangeRole(string newRole)
     {
-        if (Role == newRole)
-            throw new InvalidOperationException("This role is already assigned to this user.");
-        
-        if (!Enum.IsDefined(newRole))
+        if (!Enum.TryParse<UserRole>(newRole, ignoreCase: true, out var parsedRole))
             throw new ArgumentException("Incorrect user role.", nameof(newRole));
         
-        Role = newRole;
+        if (Role == parsedRole)
+            throw new InvalidOperationException("This role is already assigned to this user.");
+        
+        Role = parsedRole;
     }
     
     public void ChangeName(string name)

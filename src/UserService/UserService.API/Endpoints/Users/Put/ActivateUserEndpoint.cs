@@ -20,6 +20,7 @@ public class ActivateUserEndpoint : IEndpoint
         })
         .WithName("ActivateUser")
         .Produces<StatusCodeResult>(StatusCodes.Status204NoContent)
-        .WithSummary("Activate user");
+        .WithSummary("Activate user")
+        .RequireAuthorization("Admin");
     }
 }

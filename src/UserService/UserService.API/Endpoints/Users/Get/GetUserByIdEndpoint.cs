@@ -13,18 +13,20 @@ public class GetUserByIdEndpoint : IEndpoint
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
         app.MapGet("users/{id:guid}", async (
-            ISender sender, 
-            [FromRoute] Guid id, 
-            CancellationToken ct) =>
-        {
-            var result = await sender.Send(new GetUserByIdQuery(id), ct);
+                ISender sender,
+                [FromRoute] Guid id,
+                CancellationToken ct) =>
+            {
+                var result = await sender.Send(new GetUserByIdQuery(id), ct);
 
-            var response = result.Adapt<GetUserByIdResponse>();
+                var response = result.Adapt<GetUserByIdResponse>();
 
-            return Results.Ok(response);
-        })
-        .WithName("GetUserById")
-        .Produces<GetUserByIdResponse>()
-        .WithSummary("Get user by specified id");;
+                return Results.Ok(response);
+            })
+            .WithName("GetUserById")
+            .Produces<GetUserByIdResponse>()
+            .WithSummary("Get user by specified id")
+            .AllowAnonymous();
+        // .RequireAuthorization("Admin"); todo
     }
 }

@@ -20,6 +20,7 @@ public class DeactivateUserEndpoint : IEndpoint
         })
         .WithName("DeactivateUser")
         .Produces<StatusCodeResult>(StatusCodes.Status204NoContent)
-        .WithSummary("Deactivate user");
+        .WithSummary("Deactivate user")
+        .RequireAuthorization("Admin");
     }
 }

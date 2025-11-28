@@ -19,6 +19,7 @@ public class DeleteUserEndpoint : IEndpoint
         })
         .WithName("DeleteUser")
         .Produces<StatusCodeResult>(StatusCodes.Status204NoContent)
-        .WithSummary("Delete a user by provided identifier");
+        .WithSummary("Delete a user by provided identifier")
+        .RequireAuthorization("Admin");
     }
 }

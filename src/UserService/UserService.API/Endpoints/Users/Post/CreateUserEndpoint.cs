@@ -30,7 +30,8 @@ public class CreateUserEndpoint : IEndpoint
         })
         .WithName("CreateUser")
         .Produces<CreateUserResponse>(StatusCodes.Status201Created)
-        .WithSummary("Create a user with provided information");
+        .WithSummary("Create a user with provided information")
+        .RequireAuthorization("Admin");
     }
 }
 

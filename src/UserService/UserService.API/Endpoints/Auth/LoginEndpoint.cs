@@ -26,6 +26,7 @@ public class LoginEndpoint : IEndpoint
         })
         .WithName("Login")
         .Produces<StatusCodeResult>()
-        .WithSummary("Login a user by provided credentials");;
+        .WithSummary("Login a user by provided credentials")
+        .AllowAnonymous();
     }
 }

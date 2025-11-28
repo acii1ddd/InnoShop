@@ -1,7 +1,10 @@
-﻿using System.Text;
+﻿using System.Security.Claims;
+using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using UserService.API.EndpointsSettings;
+using UserService.Domain.Enums;
 
 namespace UserService.API.ConfigurationExtensions;
 
@@ -12,17 +15,66 @@ public static class DependencyInjection
         public IServiceCollection AddApiServices(IConfiguration config)
         {
             services
-                .AddOpenApiSpec()
                 .AddEndpoints(typeof(Program).Assembly)
-                .AddAuthentication();
+                .AddOpenApiSpecs()
+                .AddJwtAuthentication(config)
+                .AddAuthorizationPolitics(config);
+            
+            return services;
+        }
+        
+        private IServiceCollection AddOpenApiSpecs()
+        {
+            services.AddOpenApi(options =>
+            {
+                options.AddDocumentTransformer((document, _, _) =>
+                {
+                    document.Components ??= new OpenApiComponents();
+                    document.Components.SecuritySchemes.Add("Bearer", new OpenApiSecurityScheme
+                    {
+                        Type = SecuritySchemeType.Http,
+                        Scheme = "bearer",
+                        BearerFormat = "JWT",
+                        Description = "Input your Bearer token to access this API",
+                        In = ParameterLocation.Header,
+                        Name = "Authorization"
+                    });
 
-            // jwt settings
+                    document.SecurityRequirements.Add(new OpenApiSecurityRequirement
+                    {
+                        {
+                            new OpenApiSecurityScheme
+                            {
+                                Reference = new OpenApiReference
+                                {
+                                    Type = ReferenceType.SecurityScheme,
+                                    Id = "Bearer"
+                                }
+                            },
+                            Array.Empty<string>()
+                        }
+                    });
+                    
+                    document.Info = new OpenApiInfo
+                    {
+                        Title = "InnoShop UserService",
+                        Version = "v1",
+                        Description = "UserService API to manage users."
+                    };
+
+                    return Task.CompletedTask;
+                });
+            });
+
+            return services;
+        }
+        
+        private IServiceCollection AddJwtAuthentication(IConfiguration config)
+        {
             var issuer = config["AuthSettings:Issuer"];
             var audience = config["AuthSettings:Audience"];
-            var lifetime = int.Parse(config["AuthSettings:Lifetime"] ?? "60");
             var secret = config["AuthSettings:Secret"];
             
-            // config auth
             services
                 .AddAuthentication(options =>
                 {
@@ -43,45 +95,38 @@ public static class DependencyInjection
                         ValidateLifetime = true,
                         ClockSkew = TimeSpan.Zero
                     };
+                    
+                    // options.TokenValidationParameters = new TokenValidationParameters
+                    // {
+                    //     ValidateIssuer = false,
+                    //     ValidateAudience = false,
+                    //     ValidateIssuerSigningKey = false,
+                    //     ValidateLifetime = false
+                    // };
                 });
-            
-            // services.AddAuthorization(authOptions =>
-            // {
-            //     authOptions.AddPolicy
-            //     (
-            //         "Default, Admin",
-            //         policy =>
-            //         {
-            //             policy.RequireAuthenticatedUser();
-            //             policy.RequireClaim(
-            //                 ClaimTypes.Role, 
-            //                 nameof(UserRole.Default), 
-            //                 nameof(UserRole.Admin)
-            //             );
-            //         }
-            //     );
-            //
-            //     authOptions.AddPolicy
-            //     (
-            //         nameof(UserRole.Admin),
-            //         policy =>
-            //         {
-            //             policy.RequireAuthenticatedUser();
-            //             policy.RequireClaim(
-            //                 ClaimTypes.Role, 
-            //                 nameof(UserRole.Admin)
-            //             );
-            //         }
-            //     );
-            // });
-            
+
             return services;
         }
 
-        private IServiceCollection AddOpenApiSpec()
+        private IServiceCollection AddAuthorizationPolitics(IConfiguration config)
         {
-            services.AddOpenApi();
-    
+            services.AddAuthorization(authOptions =>
+            {
+                authOptions.AddPolicy
+                (
+                    "Admin",
+                    policy =>
+                    {
+                        policy.RequireAuthenticatedUser();
+                        policy.RequireClaim(
+                            ClaimTypes.Role, 
+                            // allowed roles
+                            nameof(UserRole.Default), nameof(UserRole.Admin)
+                        );
+                    }
+                );
+            });
+
             return services;
         }
     }
