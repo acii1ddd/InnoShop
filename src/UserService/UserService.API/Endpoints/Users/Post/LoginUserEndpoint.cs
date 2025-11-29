@@ -5,7 +5,7 @@ using UserService.API.EndpointsSettings;
 using UserService.Application.Dtos;
 using UserService.Application.UseCases.Commands.Auth;
 
-namespace UserService.API.Endpoints.Auth;
+namespace UserService.API.Endpoints.Users.Post;
 public sealed record LoginUserRequest(string Email, string Password);
 public sealed record LoginUserResponse(LoginUserDto User);
 public class LoginUserEndpoint : IEndpoint

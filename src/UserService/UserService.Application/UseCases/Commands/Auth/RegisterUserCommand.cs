@@ -54,13 +54,10 @@ public class RegisterUserCommandHandler(
         
         _ = await emailConfirmationRepository.AddAsync(emailConfirmation, ct);
 
-        var confirmationLink = $"http://localhost:7878/api/confirm-email?token={token}";
-        
-        // change it to command.UserId
-        const string userEmail = "zagorcevviktor604@gmail.com";
+        var confirmationLink = $"http://localhost:7878/api/confirm-email?token={Uri.EscapeDataString(token)}";
         
         await emailService.SendEmailConfirmationAsync(
-            userEmail, confirmationLink, ct
+            newUser.Email, confirmationLink, ct
         );
         
         return new RegisterUserResult(newUser.Id);

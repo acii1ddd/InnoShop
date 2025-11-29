@@ -113,7 +113,21 @@ public static class DependencyInjection
                         policy.RequireClaim(
                             ClaimTypes.Role, 
                             // allowed roles
-                            nameof(UserRole.Default), nameof(UserRole.Admin)
+                            nameof(UserRole.Admin)
+                        );
+                    }
+                );
+                
+                authOptions.AddPolicy
+                (
+                    "Default",
+                    policy =>
+                    {
+                        policy.RequireAuthenticatedUser();
+                        policy.RequireClaim(
+                            ClaimTypes.Role, 
+                            // allowed roles
+                            nameof(UserRole.Default)
                         );
                     }
                 );

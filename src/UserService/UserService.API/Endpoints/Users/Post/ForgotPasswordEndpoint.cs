@@ -1,4 +1,4 @@
-namespace UserService.API.Endpoints.Users;
+namespace UserService.API.Endpoints.Users.Post;
 
 // todo AllowAnonymous();
 public class ForgotPasswordEndpoint

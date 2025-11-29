@@ -5,27 +5,27 @@ using UserService.Application.UseCases.Commands;
 
 namespace UserService.API.Endpoints.Users.Put;
 
-public record UpdateUserRequest(string Name, string Email);
-public class UpdateUserEndpoint : IEndpoint
+public record UpdateUserRoleRequest(string Role);
+
+public class UpdateUserRoleEndpoint : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapPut("users/{id:guid}", async (
+        app.MapPut("users/{id:guid}/role", async (
                 ISender sender,
                 [FromRoute] Guid id,
-                [FromBody] UpdateUserRequest updateUserRequest,
+                [FromBody] UpdateUserRoleRequest updateUserRoleRequest,
                 CancellationToken ct) =>
             {
-                var command = new UpdateUserCommand(id, updateUserRequest.Name,
-                    updateUserRequest.Email);
+                var command = new UpdateUserRoleCommand(id, updateUserRoleRequest.Role);
 
                 _ = await sender.Send(command, ct);
 
                 return Results.NoContent();
             })
-            .WithName("UpdateUser")
+            .WithName("UpdateUserRole")
             .Produces<StatusCodeResult>(StatusCodes.Status204NoContent)
-            .WithSummary("Update a user name, email with provided information")
-            .RequireAuthorization("Default");
+            .WithSummary("Update a user role with provided role")
+            .RequireAuthorization("Admin");
     }
 }

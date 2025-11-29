@@ -26,7 +26,6 @@ public class GetUserByIdEndpoint : IEndpoint
             .WithName("GetUserById")
             .Produces<GetUserByIdResponse>()
             .WithSummary("Get user by specified id")
-            .AllowAnonymous();
-        // .RequireAuthorization("Admin"); todo
+            .RequireAuthorization("Admin");
     }
 }

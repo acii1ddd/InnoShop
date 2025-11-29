@@ -8,6 +8,7 @@ public sealed record ConfirmEmailCommand(string Token)
     : ICommand<ConfirmEmailResult>;
 
 public sealed record ConfirmEmailResult(string Message);
+
 internal sealed class ConfirmEmailCommandHandler(
     IUserRepository userRepository, 
     IEmailConfirmationRepository emailConfirmationRepository) 
@@ -22,6 +23,11 @@ internal sealed class ConfirmEmailCommandHandler(
         if (emailConfirmation is null)
         {
             throw new NotFoundException("EmailConfirmation", command.Token);
+        }
+        
+        if (emailConfirmation.User.IsEmailConfirmed)
+        {
+            throw new BadRequestException("Email is already confirmed");
         }
 
         emailConfirmation.ValidateToken(command.Token);

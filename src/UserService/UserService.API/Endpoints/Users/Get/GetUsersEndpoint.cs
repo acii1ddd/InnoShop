@@ -36,7 +36,6 @@ public class GetUsersEndpoint : IEndpoint
             .Produces<GetPaginatedUsersResponse>()
             .WithSummary("Get a paginated list of users")
             .RequireAuthorization()
-            .AllowAnonymous();
-        //.RequireAuthorization("Admin"); todo
+            .RequireAuthorization("Admin");
     }
 }

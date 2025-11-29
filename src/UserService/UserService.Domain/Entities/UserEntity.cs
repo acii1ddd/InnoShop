@@ -20,7 +20,8 @@ public class UserEntity
     
     public ICollection<EmailConfirmation> EmailConfirmations { get; private set; } = [];
 
-    public static UserEntity Create(Guid id, string name, string email, UserRole role, string passwordHash, bool isActive, bool isEmailConfirmed)
+    public static UserEntity Create(Guid id, string name, string email, UserRole role, 
+        string passwordHash, bool isActive, bool isEmailConfirmed)
     {
         if (id == Guid.Empty)
             throw new ArgumentException("Id can not by empty", nameof(id));
@@ -54,25 +55,16 @@ public class UserEntity
     
     public void ConfirmEmailAsync()
     {
-        if (IsEmailConfirmed)
-            throw new InvalidOperationException("Email is already confirmed.");
-        
         IsEmailConfirmed = true;
     }
     
     public void Deactivate()
     {
-        if (!IsActive)
-            throw new InvalidOperationException("User is already not active.");
-        
         IsActive = false;
     }
 
     public void Activate()
     {
-        if (IsActive)
-            throw new InvalidOperationException("User is already active.");
-        
         IsActive = true;
     }
     
@@ -81,17 +73,11 @@ public class UserEntity
         if (!Enum.TryParse<UserRole>(newRole, ignoreCase: true, out var parsedRole))
             throw new ArgumentException("Incorrect user role.", nameof(newRole));
         
-        if (Role == parsedRole)
-            throw new InvalidOperationException("This role is already assigned to this user.");
-        
         Role = parsedRole;
     }
     
     public void ChangeName(string name)
     {
-        if (name == Name)
-            throw new InvalidOperationException("This name is already assigned to this user.");
-        
         ArgumentException.ThrowIfNullOrEmpty(name);
         if (name.Length < 5)
             throw new ArgumentException("Name should include at least 5 letters.", nameof(name));
@@ -101,13 +87,18 @@ public class UserEntity
     
     public void ChangeEmail(string email)
     {
-        if (email == Email)
-            throw new InvalidOperationException("This email is already assigned to this user.");
-     
         ArgumentException.ThrowIfNullOrEmpty(email);
         if (!email.Contains('@'))
             throw new ArgumentException("Incorrect email.", nameof(email));
         
         Email = email;
+    }
+    
+    public void ChangePassword(string newPasswordHash)
+    {
+        ArgumentException.ThrowIfNullOrEmpty(newPasswordHash);
+
+        if (newPasswordHash != PasswordHash)
+            PasswordHash = newPasswordHash;
     }
 }
