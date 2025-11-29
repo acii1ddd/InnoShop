@@ -1,4 +1,4 @@
-using UserService.Application.Interfaces;
+using UserService.Domain.Interfaces;
 
 namespace UserService.Infrastructure.Tools;
 

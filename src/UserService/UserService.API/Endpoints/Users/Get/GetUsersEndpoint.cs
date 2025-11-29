@@ -20,20 +20,23 @@ public class GetUsersEndpoint : IEndpoint
 {
     public async void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapGet("/", async (
-                ISender sender, 
+        app.MapGet("users/", async (
+                ISender sender,
                 [AsParameters] GetUsersRequest getUsersRequest,
                 CancellationToken ct) =>
-        {
-            var query = getUsersRequest.Adapt<GetUsersQuery>();
+            {
+                var query = getUsersRequest.Adapt<GetUsersQuery>();
 
-            var result = await sender.Send(query, ct);
+                var result = await sender.Send(query, ct);
 
-            var response = result.Adapt<GetPaginatedUsersResponse>();
-            return Results.Ok(response);
-        })
-        .WithName("GetUsers")
-        .Produces<GetPaginatedUsersResponse>()
-        .WithSummary("Get a paginated list of users");
+                var response = result.Adapt<GetPaginatedUsersResponse>();
+                return Results.Ok(response);
+            })
+            .WithName("GetUsers")
+            .Produces<GetPaginatedUsersResponse>()
+            .WithSummary("Get a paginated list of users")
+            .RequireAuthorization()
+            .AllowAnonymous();
+        //.RequireAuthorization("Admin"); todo
     }
 }

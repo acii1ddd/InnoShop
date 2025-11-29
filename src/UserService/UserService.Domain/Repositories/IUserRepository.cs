@@ -7,4 +7,6 @@ public interface IUserRepository : IAsyncRepository<UserEntity>
     public Task<IReadOnlyList<UserEntity>> GetPagedAsync(int pageIndex, int pageSize, CancellationToken ct);
     
     public Task<int> GetCountAsync(CancellationToken ct);
+    
+    public Task<UserEntity?> GetByEmailAsync(string email, CancellationToken ct);
 }

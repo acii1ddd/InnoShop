@@ -60,4 +60,10 @@ public class UserRepository(UserContext context) : IUserRepository
     {
         return await context.Users.CountAsync(ct);
     }
+
+    public async Task<UserEntity?> GetByEmailAsync(string email, CancellationToken ct)
+    {
+        return await context.Users
+            .FirstOrDefaultAsync(x => x.Email == email, ct);
+    }
 }

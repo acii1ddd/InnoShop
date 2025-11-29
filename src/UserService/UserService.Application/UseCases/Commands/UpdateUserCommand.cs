@@ -46,7 +46,7 @@ internal sealed class UpdateUserCommandHandler(IUserRepository userRepository)
         
         user.ChangeName(command.Name);
         user.ChangeEmail(command.Email);
-        user.ChangeRole(Enum.Parse<UserRole>(command.Role));
+        user.ChangeRole(command.Role);
         
         await userRepository.UpdateAsync(user, ct);
         

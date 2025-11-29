@@ -5,21 +5,22 @@ using UserService.Application.UseCases.Commands;
 
 namespace UserService.API.Endpoints.Users.Put;
 
-public class ActivateUser : IEndpoint
+public class DeactivateUserEndpoint : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapPut("/{id:guid}/activate", async (
+        app.MapPut("users/{id:guid}/deactivate", async (
             ISender sender,
             Guid id,
             CancellationToken ct) =>
         {
-            _ = await sender.Send(new ActivateUserCommand(id), ct);
+            _ = await sender.Send(new DeactivateUserCommand(id), ct);
 
             return Results.NoContent();
         })
-        .WithName("ActivateUser")
+        .WithName("DeactivateUser")
         .Produces<StatusCodeResult>(StatusCodes.Status204NoContent)
-        .WithSummary("Activate user");
+        .WithSummary("Deactivate user")
+        .RequireAuthorization("Admin");
     }
 }

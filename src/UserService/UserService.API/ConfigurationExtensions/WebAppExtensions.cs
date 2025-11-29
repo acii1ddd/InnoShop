@@ -10,14 +10,30 @@ public static class WebAppExtensions
         if (app.Environment.IsDevelopment())
         {
             app.MapOpenApi();
-            app.MapScalarApiReference();
-        }
+            
+            app.MapScalarApiReference(options =>
+            {
+                options.AddPreferredSecuritySchemes("Bearer");
+                
+                options.AddHttpAuthentication("Bearer", auth =>
+                {
+                    auth.Token = "eyJhbGciOiJ...";
+                });
 
-        // map endpoints
-        var mapGroup = app.MapGroup("/api/users");
-        app.MapEndpoints(mapGroup);
+                options.Title = "UserService APi";
+                options.Theme = ScalarTheme.BluePlanet;
+                options.DefaultHttpClient = new KeyValuePair<ScalarTarget, ScalarClient>(ScalarTarget.CSharp, ScalarClient.HttpClient);
+            });
+        }
         
         app.UseExceptionHandler(opt => {});
+
+        app.UseAuthentication();
+        app.UseAuthorization();
+        
+        // map endpoints
+        var mapGroup = app.MapGroup("/api");
+        app.MapEndpoints(mapGroup);
         
         await app.InitDbAsync();
     }

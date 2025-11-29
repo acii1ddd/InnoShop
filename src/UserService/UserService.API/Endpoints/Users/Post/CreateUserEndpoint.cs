@@ -14,7 +14,7 @@ public class CreateUserEndpoint : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapPost("/", async (
+        app.MapPost("users/", async (
             ISender sender, 
             [FromBody] CreateUserRequest createUserRequest, 
             CancellationToken ct) =>
@@ -30,7 +30,8 @@ public class CreateUserEndpoint : IEndpoint
         })
         .WithName("CreateUser")
         .Produces<CreateUserResponse>(StatusCodes.Status201Created)
-        .WithSummary("Create a user with provided information");
+        .WithSummary("Create a user with provided information")
+        .RequireAuthorization("Admin");
     }
 }
 

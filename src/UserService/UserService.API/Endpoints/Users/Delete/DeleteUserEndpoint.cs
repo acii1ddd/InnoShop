@@ -8,7 +8,7 @@ public class DeleteUserEndpoint : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapDelete("/{id:guid}", async (
+        app.MapDelete("users/{id:guid}", async (
             ISender sender,
             Guid id,
             CancellationToken ct) =>
@@ -19,6 +19,7 @@ public class DeleteUserEndpoint : IEndpoint
         })
         .WithName("DeleteUser")
         .Produces<StatusCodeResult>(StatusCodes.Status204NoContent)
-        .WithSummary("Delete a user by provided identifier");
+        .WithSummary("Delete a user by provided identifier")
+        .RequireAuthorization("Admin");
     }
 }
