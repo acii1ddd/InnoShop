@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using UserService.API.EndpointsSettings;
 using UserService.Application.UseCases.Commands;
+using UserService.Application.UseCases.Commands.Update;
 
 namespace UserService.API.Endpoints.Users.Put;
 
@@ -11,7 +12,7 @@ public class ConfirmEmailEndpoint : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapGet("/confirm-email", async (
+        app.MapGet("confirm-email", async (
             [FromQuery] string token, 
             ISender sender,
             CancellationToken ct) =>

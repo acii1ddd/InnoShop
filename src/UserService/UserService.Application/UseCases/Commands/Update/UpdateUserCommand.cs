@@ -4,7 +4,7 @@ using Shared.CQRS;
 using Shared.Exceptions;
 using UserService.Domain.Repositories;
 
-namespace UserService.Application.UseCases.Commands;
+namespace UserService.Application.UseCases.Commands.Update;
 
 public sealed record UpdateUserCommand(Guid Id, string Name, string Email) 
     : ICommand;

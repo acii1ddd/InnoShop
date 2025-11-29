@@ -2,6 +2,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using UserService.API.EndpointsSettings;
 using UserService.Application.UseCases.Commands;
+using UserService.Application.UseCases.Commands.Delete;
 
 namespace UserService.API.Endpoints.Users.Delete;
 public class DeleteUserEndpoint : IEndpoint

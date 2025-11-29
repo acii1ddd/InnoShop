@@ -2,7 +2,7 @@ using Shared.CQRS;
 using Shared.Exceptions;
 using UserService.Domain.Repositories;
 
-namespace UserService.Application.UseCases.Commands;
+namespace UserService.Application.UseCases.Commands.Update;
 
 public sealed record ConfirmEmailCommand(string Token) 
     : ICommand<ConfirmEmailResult>;

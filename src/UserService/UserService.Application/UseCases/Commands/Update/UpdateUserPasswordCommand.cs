@@ -5,7 +5,7 @@ using Shared.Exceptions;
 using UserService.Domain.Interfaces;
 using UserService.Domain.Repositories;
 
-namespace UserService.Application.UseCases.Commands;
+namespace UserService.Application.UseCases.Commands.Update;
 
 public sealed record UpdateUserPasswordCommand(Guid Id, string Password) 
     : ICommand;
