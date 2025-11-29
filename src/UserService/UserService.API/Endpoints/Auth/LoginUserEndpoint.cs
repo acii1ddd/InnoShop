@@ -8,7 +8,7 @@ using UserService.Application.UseCases.Commands.Auth;
 namespace UserService.API.Endpoints.Auth;
 public sealed record LoginUserRequest(string Email, string Password);
 public sealed record LoginUserResponse(LoginUserDto User);
-public class LoginEndpoint : IEndpoint
+public class LoginUserEndpoint : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {

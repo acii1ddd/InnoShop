@@ -95,14 +95,6 @@ public static class DependencyInjection
                         ValidateLifetime = true,
                         ClockSkew = TimeSpan.Zero
                     };
-                    
-                    // options.TokenValidationParameters = new TokenValidationParameters
-                    // {
-                    //     ValidateIssuer = false,
-                    //     ValidateAudience = false,
-                    //     ValidateIssuerSigningKey = false,
-                    //     ValidateLifetime = false
-                    // };
                 });
 
             return services;

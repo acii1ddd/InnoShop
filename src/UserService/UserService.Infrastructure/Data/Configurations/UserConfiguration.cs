@@ -30,5 +30,9 @@ public class UserConfiguration : IEntityTypeConfiguration<UserEntity>
         builder.Property(x => x.PasswordHash).IsRequired();
         
         builder.Property(x => x.IsEmailConfirmed).IsRequired();
+        
+        builder.HasMany(x => x.EmailConfirmations)
+            .WithOne(x => x.User)
+            .HasForeignKey(x => x.UserId);
     }
 }

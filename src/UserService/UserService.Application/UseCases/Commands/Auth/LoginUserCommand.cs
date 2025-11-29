@@ -1,4 +1,3 @@
-using Mapster;
 using Shared.CQRS;
 using Shared.Exceptions;
 using UserService.Application.Dtos;
@@ -28,16 +27,21 @@ internal sealed class LoginUserCommandHandler(
         {
             throw new NotFoundException("User", command.Email);
         }
-
+        
         if (!passwordHasher.Verify(command.Password, user.PasswordHash))
         {
             throw new BadRequestException("Incorrect credentials");
+        }
+        
+        if (!user.IsEmailConfirmed)
+        {
+            throw new BadRequestException("User email is not confirmed");
         }
 
         var accessToken = tokenGenerator
             .GenerateAccessToken(user.Id, user.Role);
 
-        var loginUserDto = new LoginUserDto(user.Id, user.Role, accessToken);
+        var loginUserDto = new LoginUserDto(user.Id, user.Role.ToString(), accessToken);
         return new LoginUserResult(loginUserDto);
     }
 }

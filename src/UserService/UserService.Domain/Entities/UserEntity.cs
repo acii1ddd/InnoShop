@@ -17,6 +17,8 @@ public class UserEntity
     public bool IsActive { get; private set; }
     
     public bool IsEmailConfirmed { get; private set; }
+    
+    public ICollection<EmailConfirmation> EmailConfirmations { get; private set; } = [];
 
     public static UserEntity Create(Guid id, string name, string email, UserRole role, string passwordHash, bool isActive, bool isEmailConfirmed)
     {

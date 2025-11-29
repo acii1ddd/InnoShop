@@ -8,6 +8,8 @@ public class UserContext(DbContextOptions<UserContext> options)
     : DbContext(options)
 {
     public DbSet<UserEntity> Users { get; set; }
+    
+    public DbSet<EmailConfirmation> EmailConfirmations { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

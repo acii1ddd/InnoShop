@@ -1,5 +1,3 @@
-using UserService.Domain.Enums;
-
 namespace UserService.Application.Dtos;
 
-public sealed record LoginUserDto(Guid UserId, UserRole Role, string AccessToken);
+public sealed record LoginUserDto(Guid UserId, string Role, string AccessToken);
