@@ -27,6 +27,12 @@ internal sealed class GetMyProductByIdQueryHandler(IProductRepository productRep
         {
             throw new ForbiddenException($"Product {query.Id} does not belong to user {query.UserId}");
         }
+        
+        if (!product.IsAvailable)
+        {
+            throw new UnavailableProductException("This product is unavailable", 
+                $"ProductId: {product.Id}, Name: {product.Name}");
+        }
 
         var productInfoDto = new ProductInfoDto(product.Id, product.Name, product.Description, 
             product.Price, product.CreatedAt);
