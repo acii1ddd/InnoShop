@@ -1,8 +1,9 @@
 using FluentValidation;
+using ProductService.Application.Interfaces;
 using ProductService.Domain.Entities;
-using ProductService.Domain.Interfaces;
 using ProductService.Domain.Repositories;
 using Shared.CQRS;
+using Shared.Exceptions;
 
 namespace ProductService.Application.UseCases.Commands;
 
@@ -39,8 +40,12 @@ public class CreteProductCommandHandler(
 {
     public async Task<CreateProductResult> Handle(CreateProductCommand command, CancellationToken ct)
     {
-        // проверка
-        var isSuccess = await userServiceClient.GetByIdAsync(command.UserId, ct);
+        var isSuccess = await userServiceClient.ExistsAsync(command.UserId, ct);
+
+        if (!isSuccess)
+        {
+            throw new BadRequestException("User is not exists in user service database.");
+        }
         
         var user = ProductEntity.Create(
             Guid.NewGuid(),

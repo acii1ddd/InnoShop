@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ProductService.Application.Interfaces;
 using ProductService.Domain.Interfaces;
 using ProductService.Domain.Repositories;
 using ProductService.Infrastructure.Data;
