@@ -1,7 +1,5 @@
-using MediatR;
 using Shared.CQRS;
 using Shared.Exceptions;
-using UserService.Domain.Interfaces;
 using UserService.Domain.Repositories;
 
 namespace UserService.Application.UseCases.Commands.Recovery;

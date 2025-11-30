@@ -1,7 +1,6 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using UserService.API.EndpointsSettings;
-using UserService.Application.UseCases.Commands;
 using UserService.Application.UseCases.Commands.Update;
 
 namespace UserService.API.Endpoints.Users.Put;
