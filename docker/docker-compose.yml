@@ -17,6 +17,26 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+  
+  products-db:
+    container_name: products-db
+    image: postgres:18.0
+    restart: always
+    ports:
+      - "7979:${PRODUCTS_CONTAINER_PORT}"
+    volumes:
+      - products-db:/var/lib/postgresql
+    environment:
+      - POSTGRES_DB=${PRODUCTS_POSTGRES_DB}
+      - PGPORT=${PRODUCTS_CONTAINER_PORT}
+      - POSTGRES_USER=${PRODUCTS_POSTGRES_USER}
+      - POSTGRES_PASSWORD=${PRODUCTS_POSTGRES_PASSWORD}
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${PRODUCTS_POSTGRES_USER} -d ${PRODUCTS_POSTGRES_DB} -p ${PRODUCTS_CONTAINER_PORT}" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
 volumes:
   users-db:
+  products-db:
