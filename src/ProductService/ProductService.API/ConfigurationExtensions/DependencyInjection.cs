@@ -109,10 +109,10 @@ public static class DependencyInjection
                     policy =>
                     {
                         policy.RequireAuthenticatedUser();
-                        // policy.RequireClaim(
-                        //     ClaimTypes.Role, 
-                        //     nameof(.Admin)
-                        // );
+                        policy.RequireClaim(
+                            ClaimTypes.Role, 
+                            "Default"
+                        );
                     }
                 );
             });

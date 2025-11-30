@@ -33,6 +33,11 @@ internal sealed class LoginUserCommandHandler(
             throw new BadRequestException("Incorrect credentials");
         }
         
+        if (!user.IsActive)
+        {
+            throw new BadRequestException("User is not active");
+        }
+        
         if (!user.IsEmailConfirmed)
         {
             throw new BadRequestException("User email is not confirmed");

@@ -11,7 +11,7 @@ public class PasswordHasherTests(ITestOutputHelper output)
     public void Hash_ShouldOutputHash_ForPassword123()
     {
         // Arrange
-        var password = "123";
+        var password = "1234";
 
         // Act
         var hash = _hasher.Hash(password);
