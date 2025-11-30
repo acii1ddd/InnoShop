@@ -18,7 +18,7 @@ public static class DependencyInjection
                 .AddEndpoints(typeof(Program).Assembly)
                 .AddOpenApiSpecs()
                 .AddJwtAuthentication(config)
-                .AddAuthorizationPolitics(config);
+                .AddAuthorizationPolitics();
             
             return services;
         }
@@ -100,7 +100,7 @@ public static class DependencyInjection
             return services;
         }
 
-        private IServiceCollection AddAuthorizationPolitics(IConfiguration config)
+        private IServiceCollection AddAuthorizationPolitics()
         {
             services.AddAuthorization(authOptions =>
             {

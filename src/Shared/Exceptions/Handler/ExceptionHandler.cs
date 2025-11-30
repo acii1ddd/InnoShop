@@ -18,6 +18,7 @@ public class ExceptionHandler(ILogger<ExceptionHandler> logger)
         
         var (statusCode, errorMessage) = e switch
         {
+            UnavailableProductException unavailableEx => (HttpStatusCode.Conflict, unavailableEx.Message),
             OperationCanceledException operationCanceledEx => (HttpStatusCode.BadRequest, operationCanceledEx.Message),
             BadRequestException badRequestEx => (HttpStatusCode.BadRequest, badRequestEx.Message),
             InternalServerException internalServerEx => (HttpStatusCode.InternalServerError, internalServerEx.Message),

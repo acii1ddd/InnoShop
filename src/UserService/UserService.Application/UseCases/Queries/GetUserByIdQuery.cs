@@ -9,7 +9,7 @@ namespace UserService.Application.UseCases.Queries;
 public sealed record GetUserByIdQuery(Guid Id) 
     : IQuery<GetUserByIdResult>;
 
-public record GetUserByIdResult(UserDto User);
+public sealed record GetUserByIdResult(UserDto User);
 
 internal sealed class GetUserByIdQueryHandler(IUserRepository userRepository) 
     : IQueryHandler<GetUserByIdQuery, GetUserByIdResult>

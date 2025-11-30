@@ -20,7 +20,7 @@ public static class WebAppExtensions
                     auth.Token = "eyJhbGciOiJ...";
                 });
 
-                options.Title = "UserService APi";
+                options.Title = "UserService API";
                 options.Theme = ScalarTheme.BluePlanet;
                 options.DefaultHttpClient = new KeyValuePair<ScalarTarget, ScalarClient>(ScalarTarget.CSharp, ScalarClient.HttpClient);
             });

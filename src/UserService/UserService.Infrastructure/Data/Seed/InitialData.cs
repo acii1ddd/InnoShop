@@ -19,9 +19,9 @@ internal static class InitialData
         UserEntity.Create(
             Guid.Parse("22222222-2222-2222-2222-222222222222"),
             "Bob Smith",
-            "bob.smith@example.com",
+            "bob@com",
             UserRole.Default,
-            "hashed_password_0987654321",
+            "$2a$11$D.7yl40DFePae.ck0NXVgO4Wld26zY/nARZOg3YEAcUBz/7Rz.5W6",
             isActive: true,
             isEmailConfirmed: false
         ),
