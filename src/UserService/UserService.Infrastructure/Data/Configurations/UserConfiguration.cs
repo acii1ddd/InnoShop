@@ -34,5 +34,9 @@ public class UserConfiguration : IEntityTypeConfiguration<UserEntity>
         builder.HasMany(x => x.EmailConfirmations)
             .WithOne(x => x.User)
             .HasForeignKey(x => x.UserId);
+        
+        builder.HasMany(x => x.PasswordResets)
+            .WithOne(x => x.User)
+            .HasForeignKey(x => x.UserId);
     }
 }

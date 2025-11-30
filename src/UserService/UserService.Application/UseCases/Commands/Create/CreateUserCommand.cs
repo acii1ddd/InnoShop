@@ -5,7 +5,7 @@ using UserService.Domain.Enums;
 using UserService.Domain.Interfaces;
 using UserService.Domain.Repositories;
 
-namespace UserService.Application.UseCases.Commands;
+namespace UserService.Application.UseCases.Commands.Create;
 
 public sealed record CreateUserCommand(string Name, string Email, string Password) 
     : ICommand<CreateUserResult>;

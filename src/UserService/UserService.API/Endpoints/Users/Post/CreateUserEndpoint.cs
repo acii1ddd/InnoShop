@@ -2,7 +2,7 @@ using Mapster;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using UserService.API.EndpointsSettings;
-using UserService.Application.UseCases.Commands;
+using UserService.Application.UseCases.Commands.Create;
 
 namespace UserService.API.Endpoints.Users.Post;
 
@@ -14,7 +14,7 @@ public class CreateUserEndpoint : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapPost("users/", async (
+        app.MapPost("users", async (
             ISender sender, 
             [FromBody] CreateUserRequest createUserRequest, 
             CancellationToken ct) =>

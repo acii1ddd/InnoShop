@@ -2,7 +2,7 @@ using Shared.CQRS;
 using Shared.Exceptions;
 using UserService.Domain.Repositories;
 
-namespace UserService.Application.UseCases.Commands;
+namespace UserService.Application.UseCases.Commands.Update;
 
 public sealed record ConfirmEmailCommand(string Token) 
     : ICommand<ConfirmEmailResult>;
@@ -30,7 +30,7 @@ internal sealed class ConfirmEmailCommandHandler(
             throw new BadRequestException("Email is already confirmed");
         }
 
-        emailConfirmation.ValidateToken(command.Token);
+        emailConfirmation.ValidateToken();
         emailConfirmation.User.ConfirmEmailAsync();
         await userRepository.UpdateAsync(emailConfirmation.User, ct);
         

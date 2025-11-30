@@ -20,7 +20,7 @@ public class GetUsersEndpoint : IEndpoint
 {
     public async void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapGet("users/", async (
+        app.MapGet("users", async (
                 ISender sender,
                 [AsParameters] GetUsersRequest getUsersRequest,
                 CancellationToken ct) =>

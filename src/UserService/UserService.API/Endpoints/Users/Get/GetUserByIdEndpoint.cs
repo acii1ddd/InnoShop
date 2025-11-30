@@ -8,6 +8,7 @@ using UserService.Application.UseCases.Queries;
 namespace UserService.API.Endpoints.Users.Get;
 
 public record GetUserByIdResponse(UserDto User);
+
 public class GetUserByIdEndpoint : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)

@@ -1,6 +1,6 @@
 namespace UserService.Domain.Entities;
 
-public class EmailConfirmation
+public class PasswordReset
 {
     public Guid Id { get; private set; }
     
@@ -12,7 +12,9 @@ public class EmailConfirmation
     
     public DateTime TokenExpiresAt { get; private set; }
     
-    public static EmailConfirmation Create(Guid userId, string token, DateTime expiresAt)
+    public string GeneratedPasswordHash { get; private set; } = string.Empty;
+    
+    public static PasswordReset Create(Guid userId, string token, DateTime expiresAt, string generatedPasswordHash)
     {
         if (userId == Guid.Empty)
             throw new ArgumentException("UserId cannot be empty.", nameof(userId));
@@ -22,12 +24,13 @@ public class EmailConfirmation
         if (expiresAt <= DateTime.UtcNow)
             throw new ArgumentException("Expiration date must be in the future.", nameof(expiresAt));
 
-        return new EmailConfirmation
+        return new PasswordReset
         {
             Id = Guid.NewGuid(),
             UserId = userId,
             Token = token,
             TokenExpiresAt = expiresAt,
+            GeneratedPasswordHash = generatedPasswordHash
         };
     }
     

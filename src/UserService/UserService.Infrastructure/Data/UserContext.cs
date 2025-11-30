@@ -11,6 +11,8 @@ public class UserContext(DbContextOptions<UserContext> options)
     
     public DbSet<EmailConfirmation> EmailConfirmations { get; set; }
 
+    public DbSet<PasswordReset> PasswordResets { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(UserConfiguration).Assembly);

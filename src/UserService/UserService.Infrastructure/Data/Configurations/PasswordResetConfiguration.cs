@@ -4,13 +4,13 @@ using UserService.Domain.Entities;
 
 namespace UserService.Infrastructure.Data.Configurations;
 
-public class EmailConfirmationConfiguration : IEntityTypeConfiguration<EmailConfirmation>
+public class PasswordResetConfiguration : IEntityTypeConfiguration<PasswordReset>
 {
     private const int MaxLength = 256;
     
-    public void Configure(EntityTypeBuilder<EmailConfirmation> builder)
+    public void Configure(EntityTypeBuilder<PasswordReset> builder)
     {
-        builder.ToTable("emailConfirmations");
+        builder.ToTable("passwordResets");
 
         builder.HasKey(x => x.Id);
         
@@ -24,7 +24,7 @@ public class EmailConfirmationConfiguration : IEntityTypeConfiguration<EmailConf
         
         builder
             .HasOne(x => x.User)
-            .WithMany(x => x.EmailConfirmations)
+            .WithMany(x => x.PasswordResets)
             .HasForeignKey(x => x.UserId);
     }
 }

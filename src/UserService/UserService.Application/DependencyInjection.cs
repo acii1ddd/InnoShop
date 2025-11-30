@@ -3,6 +3,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Shared.Behavior;
 using Shared.Exceptions.Handler;
 using UserService.Application.UseCases.Commands;
+using UserService.Application.UseCases.Commands.Create;
+using UserService.Application.UseCases.Commands.Update;
 
 namespace UserService.Application;
 

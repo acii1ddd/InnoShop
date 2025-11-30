@@ -4,7 +4,7 @@ using Shared.CQRS;
 using Shared.Exceptions;
 using UserService.Domain.Repositories;
 
-namespace UserService.Application.UseCases.Commands;
+namespace UserService.Application.UseCases.Commands.Delete;
 
 public sealed record DeleteUserCommand(Guid Id) 
     : ICommand;
