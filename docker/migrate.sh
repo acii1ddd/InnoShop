@@ -1,8 +1,7 @@
 #!/bin/bash
 
 if [ -z "$1" ]; then
-  echo "❌ Укажи имя миграции как аргумент!"
-  echo "Пример: ./add-migration.sh InitialCreate"
+  echo "Укажи имя миграции как аргумент!"
   exit 1
 fi
 

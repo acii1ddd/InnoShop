@@ -17,15 +17,15 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-  
+      
   products-db:
     container_name: products-db
     image: postgres:18.0
     restart: always
     ports:
-      - "7979:${PRODUCTS_CONTAINER_PORT}"
+      - "8888:${USERS_CONTAINER_PORT}"
     volumes:
-      - products-db:/var/lib/postgresql
+      - users-db:/var/lib/postgresql
     environment:
       - POSTGRES_DB=${PRODUCTS_POSTGRES_DB}
       - PGPORT=${PRODUCTS_CONTAINER_PORT}
@@ -39,4 +39,3 @@ services:
 
 volumes:
   users-db:
-  products-db:
