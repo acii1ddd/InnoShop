@@ -20,6 +20,9 @@ public class UserEntity
     
     public ICollection<EmailConfirmation> EmailConfirmations { get; private set; } = [];
 
+    public ICollection<PasswordReset> PasswordResets { get; private set; } = [];
+    
+    
     public static UserEntity Create(Guid id, string name, string email, UserRole role, 
         string passwordHash, bool isActive, bool isEmailConfirmed)
     {

@@ -30,7 +30,7 @@ internal sealed class ConfirmEmailCommandHandler(
             throw new BadRequestException("Email is already confirmed");
         }
 
-        emailConfirmation.ValidateToken(command.Token);
+        emailConfirmation.ValidateToken();
         emailConfirmation.User.ConfirmEmailAsync();
         await userRepository.UpdateAsync(emailConfirmation.User, ct);
         

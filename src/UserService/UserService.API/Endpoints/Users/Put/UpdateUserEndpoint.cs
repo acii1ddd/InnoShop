@@ -11,6 +11,7 @@ public class UpdateUserEndpoint : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
+        // todo из контекста брать UserId для Put информации, updatePassword, delete?
         app.MapPut("users/{id:guid}", async (
                 ISender sender,
                 [FromRoute] Guid id,

@@ -1,6 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using UserService.API.EndpointsSettings;
+using UserService.Application.UseCases.Commands.Recovery;
 
 namespace UserService.API.Endpoints.Users.Post;
 
@@ -18,7 +19,7 @@ public class ForgotPasswordEndpoint : IEndpoint
             [FromBody] ForgotPasswordRequest forgotPasswordRequest,
             CancellationToken ct) =>
         {
-            var command = new ForgotPasswordRequest(forgotPasswordRequest.Email);
+            var command = new ForgotPasswordCommand(forgotPasswordRequest.Email);
             
             _ = await sender.Send(command, ct);
 
