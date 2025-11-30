@@ -4,14 +4,14 @@ using ProductService.Domain.Repositories;
 using Shared.CQRS;
 using Shared.Exceptions;
 
-namespace ProductService.Application.UseCases.Queries;
+namespace ProductService.Application.UseCases.Queries.GetById;
 
 public sealed record GetProductByIdQuery(Guid Id) 
     : IQuery<GetProductByIdResult>;
 
 public sealed record GetProductByIdResult(ProductWithUserDto Product);
 
-internal class GetUserByIdQuery(
+internal class GetProductByIdQueryHandler(
     IProductRepository productRepository, 
     IUserServiceClient userServiceClient)
         : IQueryHandler<GetProductByIdQuery, GetProductByIdResult>

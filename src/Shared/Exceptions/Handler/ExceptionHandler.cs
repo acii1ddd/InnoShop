@@ -17,7 +17,8 @@ public class ExceptionHandler(ILogger<ExceptionHandler> logger)
             e.Message, DateTime.UtcNow);
         
         var (statusCode, errorMessage) = e switch
-        {
+        { 
+            ForbiddenException forbiddenEx => (HttpStatusCode.Forbidden, forbiddenEx.Message),
             UnavailableProductException unavailableEx => (HttpStatusCode.Conflict, unavailableEx.Message),
             OperationCanceledException operationCanceledEx => (HttpStatusCode.BadRequest, operationCanceledEx.Message),
             BadRequestException badRequestEx => (HttpStatusCode.BadRequest, badRequestEx.Message),

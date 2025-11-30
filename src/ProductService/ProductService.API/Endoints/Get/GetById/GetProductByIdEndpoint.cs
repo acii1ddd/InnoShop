@@ -2,7 +2,7 @@ using Mapster;
 using MediatR;
 using ProductService.API.EndpointsSettings;
 using ProductService.Application.Dtos;
-using ProductService.Application.UseCases.Queries;
+using ProductService.Application.UseCases.Queries.GetById;
 
 namespace ProductService.API.Endoints.Get.GetById;
 
@@ -24,7 +24,7 @@ public class GetProductByIdEndpoint : IEndpoint
         })
         .WithName("GetProductById")
         .Produces<GetProductByIdResponse>()
-        .WithSummary("Get a product by specified id")
+        .WithSummary("Get a product info by specified id")
         .AllowAnonymous();
     }
 }
