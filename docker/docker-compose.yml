@@ -1,7 +1,7 @@
 services:
   users-db:
     container_name: users-db
-    image: postgres:18
+    image: postgres:18.0
     restart: always
     ports: 
      - "8989:${USERS_CONTAINER_PORT}"
@@ -17,6 +17,56 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-
+      
+  products-db:
+    container_name: products-db
+    image: postgres:18.0
+    restart: always
+    ports:
+      - "8888:${PRODUCTS_CONTAINER_PORT}"
+    volumes:
+      - products-db:/var/lib/postgresql
+    environment:
+      - POSTGRES_DB=${PRODUCTS_POSTGRES_DB}
+      - PGPORT=${PRODUCTS_CONTAINER_PORT}
+      - POSTGRES_USER=${PRODUCTS_POSTGRES_USER}
+      - POSTGRES_PASSWORD=${PRODUCTS_POSTGRES_PASSWORD}
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${PRODUCTS_POSTGRES_USER} -d ${PRODUCTS_POSTGRES_DB} -p ${PRODUCTS_CONTAINER_PORT}" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  
+  user-service:
+    container_name: user-service 
+    image: user-service
+    build: 
+      context: ../
+      dockerfile: ./src/UserService/UserService.API/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://*:7878
+    ports:
+      - "7878:7878"
+    depends_on:
+      users-db:
+        condition: service_healthy
+    
+  product-service:
+    container_name: product-service
+    build:
+      context: ../
+      dockerfile: ./src/ProductService/ProductService.API/Dockerfile
+    image: product-service
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://*:7979
+    ports:
+      - "7979:7979"
+    depends_on:
+      products-db:
+        condition: service_healthy
+    
 volumes:
   users-db:
+  products-db:

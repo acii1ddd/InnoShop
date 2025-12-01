@@ -1,11 +1,18 @@
-using User.API.Configuration;
+using UserService.API.ConfigurationExtensions;
+using UserService.Application;
+using UserService.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddApiServices(builder.Configuration);
+var configuration = builder.Configuration;
+
+builder.Services
+    .AddApiServices(configuration)
+    .AddInfrastructureServices(configuration)
+    .AddApplicationServices();
 
 var app = builder.Build();
 
-app.ConfigureApp();
+await app.ConfigureApp();
 
 await app.RunAsync();

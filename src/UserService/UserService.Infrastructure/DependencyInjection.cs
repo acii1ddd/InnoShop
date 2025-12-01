@@ -1,12 +1,20 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using UserService.Application.Interfaces;
+using UserService.Domain.Interfaces;
+using UserService.Domain.Interfaces.Auth;
+using UserService.Domain.Repositories;
+using UserService.Infrastructure.Data;
+using UserService.Infrastructure.Repositories;
+using UserService.Infrastructure.Services;
+using UserService.Infrastructure.Tools;
 
 namespace UserService.Infrastructure;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddInfrastructure(
+    public static IServiceCollection AddInfrastructureServices(
         this IServiceCollection services, IConfiguration configuration)
     {
         services.AddDbContext<UserContext>(options =>
@@ -16,6 +24,19 @@ public static class DependencyInjection
             
             options.UseNpgsql(connectionString);
         });
+        
+        services.AddHttpClient<IProductServiceClient, ProductServiceClient>(client =>
+        {
+            client.BaseAddress = new Uri("http://product-service:7979/api/products/");
+        });
+        
+        services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IEmailConfirmationRepository, EmailConfirmationRepository>();
+        services.AddScoped<IPasswordResetRepository, PasswordResetRepository>();
+        
+        services.AddScoped<IPasswordHasher, PasswordHasher>();
+        services.AddScoped<ITokenGenerator, JwtAccessTokenGenerator>();
+        services.AddScoped<IEmailService, EmailService>();
         
         return services;
     }
