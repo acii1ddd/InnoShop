@@ -9,6 +9,7 @@ namespace ProductService.API.Endpoints.Get.GetAll;
 
 public sealed record GetMyProductsByIdResponse(IReadOnlyList<ProductInfoDto> Products);
 
+// todo фильтрация 
 public class GetMyProductsEndpoint : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
