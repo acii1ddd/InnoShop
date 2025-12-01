@@ -29,6 +29,6 @@ public class GetMyProductsEndpoint : IEndpoint
         .WithName("GetMyProductsById")
         .Produces<GetMyProductsByIdResponse>()
         .WithSummary("Get a list of my products info")
-        .RequireAuthorization("Default");
+        .AllowAnonymous();
     }
 }

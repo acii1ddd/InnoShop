@@ -26,7 +26,7 @@ public static class DependencyInjection
         
         services.AddHttpClient<IUserServiceClient, UserServiceClient>(client =>
         {
-            client.BaseAddress = new Uri("http://localhost:7878/api/users/");
+            client.BaseAddress = new Uri("http://user-service:7878/api/users/");
         });
         
         services.AddHttpContextAccessor();

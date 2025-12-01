@@ -36,7 +36,37 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-
+  
+  user-service:
+    container_name: user-service 
+    image: user-service
+    build: 
+      context: ../
+      dockerfile: ./src/UserService/UserService.API/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://*:7878
+    ports:
+      - "7878:7878"
+    depends_on:
+      users-db:
+        condition: service_healthy
+    
+  product-service:
+    container_name: product-service
+    build:
+      context: ../
+      dockerfile: ./src/ProductService/ProductService.API/Dockerfile
+    image: product-service
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://*:7979
+    ports:
+      - "7979:7979"
+    depends_on:
+      products-db:
+        condition: service_healthy
+    
 volumes:
   users-db:
   products-db:

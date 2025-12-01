@@ -33,6 +33,6 @@ public class CreateProductEndpoint : IEndpoint
         .WithName("CreateProduct")
         .Produces<CreateProductResponse>(StatusCodes.Status201Created)
         .WithSummary("Creates a product with provided information")
-        .RequireAuthorization("Default");
+        .AllowAnonymous();
     }
 }

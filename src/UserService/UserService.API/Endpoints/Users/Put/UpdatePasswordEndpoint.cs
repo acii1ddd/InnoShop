@@ -26,6 +26,6 @@ public class UpdatePasswordEndpoint : IEndpoint
             .WithName("UpdateUserPassword")
             .Produces<StatusCodeResult>(StatusCodes.Status204NoContent)
             .WithSummary("Update a user password with a provided one")
-            .RequireAuthorization("Default");
+            .RequireAuthorization("Admin");
     }
 }

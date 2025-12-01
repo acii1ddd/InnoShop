@@ -27,7 +27,7 @@ public static class DependencyInjection
         
         services.AddHttpClient<IProductServiceClient, ProductServiceClient>(client =>
         {
-            client.BaseAddress = new Uri("http://localhost:7979/api/products/");
+            client.BaseAddress = new Uri("http://product-service:7979/api/products/");
         });
         
         services.AddScoped<IUserRepository, UserRepository>();

@@ -26,6 +26,6 @@ public class UpdateProductInfoEndpoint : IEndpoint
         .WithName("UpdateProductInfo")
         .Produces<StatusCodeResult>(StatusCodes.Status204NoContent)
         .WithSummary("Updates a product name, description, price with a provided information")
-        .RequireAuthorization("Default");
+        .AllowAnonymous();
     }
 }
