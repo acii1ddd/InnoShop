@@ -39,4 +39,23 @@ public class UserServiceClient(HttpClient httpClient)
 
         return user;
     }
+    
+    public async Task<List<UserResponseDto>> GetAllAsync(IEnumerable<Guid> userIds, CancellationToken ct)
+    {
+        var userIdsList = userIds.ToList();
+        if (userIdsList.Count == 0)
+        {
+            return [];
+        }
+
+        var tasks = userIdsList
+            .Select(userId => GetByIdAsync(userId, ct));
+        
+        var results = await Task.WhenAll(tasks);
+        
+        return results
+            .Where(u => u is not null)
+            .Select(u => u!)
+            .ToList();
+    }
 }

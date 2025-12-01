@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using ProductService.Application.UseCases.Commands;
+using ProductService.Application.UseCases.Commands.Create;
 using Shared.Behavior;
 using Shared.Exceptions.Handler;
 

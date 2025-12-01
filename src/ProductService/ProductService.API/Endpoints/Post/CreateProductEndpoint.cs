@@ -2,10 +2,10 @@ using Mapster;
 using MediatR;
 using ProductService.API.EndpointsSettings;
 using ProductService.Application.UseCases.Commands;
+using ProductService.Application.UseCases.Commands.Create;
 using ProductService.Domain.Interfaces;
-using ProductService.Infrastructure.Tools;
 
-namespace ProductService.API.Endoints.Post;
+namespace ProductService.API.Endpoints.Post;
 
 public sealed record CreateProductRequest(string Name, string Description, decimal Price);
 

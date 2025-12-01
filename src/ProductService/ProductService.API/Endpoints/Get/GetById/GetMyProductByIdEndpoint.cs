@@ -5,7 +5,7 @@ using ProductService.Application.Dtos;
 using ProductService.Application.UseCases.Queries.GetById;
 using ProductService.Domain.Interfaces;
 
-namespace ProductService.API.Endoints.Get.GetById;
+namespace ProductService.API.Endpoints.Get.GetById;
 
 public sealed record GetMyProductByIdResponse(ProductInfoDto Product);
 

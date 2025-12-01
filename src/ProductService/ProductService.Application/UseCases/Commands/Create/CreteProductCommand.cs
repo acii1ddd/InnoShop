@@ -5,7 +5,7 @@ using ProductService.Domain.Repositories;
 using Shared.CQRS;
 using Shared.Exceptions;
 
-namespace ProductService.Application.UseCases.Commands;
+namespace ProductService.Application.UseCases.Commands.Create;
 
 public sealed record CreateProductCommand(string Name, string Description, decimal Price, Guid UserId)
     : ICommand<CreateProductResult>;
