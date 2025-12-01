@@ -2,6 +2,7 @@ using Mapster;
 using MediatR;
 using ProductService.API.EndpointsSettings;
 using ProductService.Application.UseCases.Commands;
+using ProductService.Application.UseCases.Commands.Create;
 using ProductService.Domain.Interfaces;
 
 namespace ProductService.API.Endpoints.Post;
