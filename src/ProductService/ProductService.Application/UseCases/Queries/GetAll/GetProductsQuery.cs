@@ -12,7 +12,8 @@ public sealed record GetProductsQuery(
     decimal? MinPrice,     
     decimal? MaxPrice,
     DateTime? CreatedAfter,
-    DateTime? CreatedBefore
+    DateTime? CreatedBefore,
+    bool IncludeUnavailable
 ) : IQuery<GetProductsResult>;
 
 public sealed record GetProductsResult(IReadOnlyList<ProductWithUserDto> Products);
@@ -57,7 +58,7 @@ internal sealed class GetProductsQueryHandler(
                  (query.MaxPrice == null || p.Price <= query.MaxPrice) &&
                  (query.CreatedAfter == null || p.CreatedAt >= query.CreatedAfter) &&
                  (query.CreatedBefore == null || p.CreatedAt <= query.CreatedBefore) &&
-                 p.IsAvailable,
+                 (query.IncludeUnavailable || p.IsAvailable),
             ct
         );
 

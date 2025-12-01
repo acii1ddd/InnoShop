@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using UserService.Application.Interfaces;
 using UserService.Domain.Interfaces;
 using UserService.Domain.Interfaces.Auth;
 using UserService.Domain.Repositories;
@@ -22,6 +23,11 @@ public static class DependencyInjection
                 ?? throw new Exception("Connection string not found");
             
             options.UseNpgsql(connectionString);
+        });
+        
+        services.AddHttpClient<IProductServiceClient, ProductServiceClient>(client =>
+        {
+            client.BaseAddress = new Uri("http://localhost:7979/api/products/");
         });
         
         services.AddScoped<IUserRepository, UserRepository>();

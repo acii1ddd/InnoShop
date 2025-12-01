@@ -2,6 +2,7 @@ using FluentValidation;
 using MediatR;
 using Shared.CQRS;
 using Shared.Exceptions;
+using UserService.Application.Interfaces;
 using UserService.Domain.Repositories;
 
 namespace UserService.Application.UseCases.Commands.Update;
@@ -18,7 +19,9 @@ public class ActivateUserCommandValidator : AbstractValidator<ActivateUserComman
     }
 }
 
-internal sealed class ActivateUserCommandHandler(IUserRepository userRepository)
+internal sealed class ActivateUserCommandHandler(
+    IUserRepository userRepository,
+    IProductServiceClient productServiceClient)
     : ICommandHandler<ActivateUserCommand>
 {
     public async Task<Unit> Handle(ActivateUserCommand command, 
@@ -32,8 +35,19 @@ internal sealed class ActivateUserCommandHandler(IUserRepository userRepository)
         }
         
         user.Activate();
-        
+
         await userRepository.UpdateAsync(user, ct);
+
+        // Get all user products
+        var products = await productServiceClient
+            .GetUnavailableProductsByUserIdAsync(command.Id, ct);
+
+        // Mark each product as available
+        foreach (var product in products)
+        {
+            _ = await productServiceClient.MarkProductAsAvailableAsync(product.ProductInfo.Id, ct);
+        }
+        
         return Unit.Value;
     }
 }

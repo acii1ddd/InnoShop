@@ -7,7 +7,7 @@ namespace ProductService.API.Endpoints.Delete;
 
 public class DeleteProductEndpoint : IEndpoint
 {
-    public void MapEndpoint(IEndpointRouteBuilder app)
+    public void MapEndpoint(IEndpointRouteBuilder app)  
     {
         app.MapDelete("users/{productId:guid}", async (
                 ISender sender,

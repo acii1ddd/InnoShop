@@ -21,6 +21,7 @@ public class GetProductsEndpoint : IEndpoint
                 [FromQuery] decimal? maxPrice,
                 [FromQuery] DateTime? createdAfter,
                 [FromQuery] DateTime? createdBefore,
+                [FromQuery] bool includeUnavailable,
                 CancellationToken ct) =>
             {
                 var query = new GetProductsQuery(
@@ -29,7 +30,8 @@ public class GetProductsEndpoint : IEndpoint
                     minPrice,
                     maxPrice,
                     createdAfter,
-                    createdBefore
+                    createdBefore,
+                    includeUnavailable
                 );
                 
                 var result = await sender.Send(query, ct);
@@ -41,6 +43,6 @@ public class GetProductsEndpoint : IEndpoint
             .WithName("GetProducts")
             .Produces<GetProductsResponse>()
             .WithSummary("Get a list of all available products with optional filters")
-            .RequireAuthorization("Default");
+            .AllowAnonymous();
     }
 }
