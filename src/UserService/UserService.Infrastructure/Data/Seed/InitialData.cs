@@ -23,7 +23,7 @@ internal static class InitialData
             UserRole.Default,
             "$2a$11$D.7yl40DFePae.ck0NXVgO4Wld26zY/nARZOg3YEAcUBz/7Rz.5W6",
             isActive: true,
-            isEmailConfirmed: false
+            isEmailConfirmed: true
         ),
         UserEntity.Create(
             Guid.Parse("33333333-3333-3333-3333-333333333333"),
